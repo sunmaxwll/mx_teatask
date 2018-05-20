@@ -1,0 +1,21 @@
+<launch>
+  <!-- <param name="robot_pose" value="0,0,0,0,0,0,1"/> -->
+  <!-- <param name="kitchen_pose" value="1,1,0,0,0,0,1"/> -->
+
+  <arg name="rvizconfig" default="$(find mx_fetchtea)/rviz/fetch_tea.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+  <!--保存地图-->
+  <!--include file="$(find mx_nav)/launch/map_save.launch"/-->
+
+  <!--AMCL定位导航-->
+  <include file="$(find mx_nav)/launch/amcl_demo.launch"/>
+  <!---->
+  
+  <!--指定厨房-->
+  <include file="$(find mx_set_kitchen)/launch/mx_set_kitchen.launch"/>
+
+  <!--语音指令-->
+  <node pkg="mx_fetchtea" type="s_fetchtea.py" name="mx_fetchtea_node" output="screen"/>
+  <node pkg="mx_fetchtea" type="fetchtea_main.py" name="mx_fetchtea_main_node" output="screen"/>
+</launch>
