@@ -27,7 +27,7 @@ class VoiceMaster():
         '''
         初始化
         '''        
-        self.command_sub = rospy.Subscriber("/voice_system/move_topic", Int32, self.voicecommand_cb, queue_size=1)  
+        self.command_sub = rospy.Subscriber("/voice_system/nav_topic", Int32, self.voicecommand_cb, queue_size=1)  
         self.fetchtea_client = rospy.ServiceProxy('s_fetchtea', scene)
         self.gohome_client = rospy.ServiceProxy('s_gohome', scene)
         
